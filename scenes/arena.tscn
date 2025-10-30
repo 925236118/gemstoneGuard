@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dp3juql3vwnri"]
+[gd_scene load_steps=9 format=3 uid="uid://dp3juql3vwnri"]
 
 [ext_resource type="PackedScene" uid="uid://bsrfuweqkt5ib" path="res://scenes/gemstone.tscn" id="1_e05a3"]
+[ext_resource type="PackedScene" uid="uid://cvo8laxsufq68" path="res://scenes/fight_ui.tscn" id="2_wl4x5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e05a3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -47,3 +48,7 @@ shape = SubResource("WorldBoundaryShape3D_e05a3")
 
 [node name="Camera3D" type="Camera3D" parent="CameraContainer"]
 transform = Transform3D(1, 0, 0, 0, 0.6907058, 0.72313595, 0, -0.72313595, 0.6907058, 0, 5.244836, 5.5035744)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("2_wl4x5")]
