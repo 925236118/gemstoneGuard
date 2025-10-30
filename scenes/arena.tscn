@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://dp3juql3vwnri"]
+
+[ext_resource type="PackedScene" uid="uid://bsrfuweqkt5ib" path="res://scenes/gemstone.tscn" id="1_e05a3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e05a3"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_wl4x5"]
+sky_material = SubResource("ProceduralSkyMaterial_e05a3")
+
+[sub_resource type="Environment" id="Environment_olpmc"]
+background_mode = 2
+sky = SubResource("Sky_wl4x5")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e05a3"]
+albedo_color = Color(0.5202933, 0.45021445, 0.24717396, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_e05a3"]
+material = SubResource("StandardMaterial3D_e05a3")
+size = Vector2(200, 200)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_e05a3"]
+
+[node name="Arena" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_olpmc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="GemStone" parent="." instance=ExtResource("1_e05a3")]
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_e05a3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_e05a3")
+
+[node name="CameraContainer" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraContainer"]
+transform = Transform3D(1, 0, 0, 0, 0.6907058, 0.72313595, 0, -0.72313595, 0.6907058, 0, 5.244836, 5.5035744)
