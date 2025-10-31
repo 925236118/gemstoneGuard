@@ -4,6 +4,7 @@ extends Control
 @onready var card_container: CardContainer = $CardContainer
 @onready var card_shower: CardShower = $CardShower
 @onready var line_2d: Line2D = $DraggingLineContainer/Line2D
+@onready var wand_container: WandContainer = $WandContainer
 
 # 状态机
 var state_machine: CallableStateMachine = CallableStateMachine.new()
@@ -32,6 +33,7 @@ func _on_show_card(index: int):
 #region 状态相关
 var showing_card_index = -1
 var drag_mouse_pos = Vector2.ZERO
+var current_card: Card = null
 
 # 待机状态
 func state_idle(_delta: float):
@@ -65,6 +67,7 @@ func state_hover(_delta: float):
 	if Input.is_action_just_pressed("mouse_click"):
 		drag_mouse_pos = get_global_mouse_position()
 		state_machine.change_state(state_dragging)
+		current_card = cards[showing_card_index]
 
 func enter_state_hover():
 	print("enter hover")
@@ -111,8 +114,17 @@ func state_drop(_delta: float):
 
 func enter_state_drop():
 	print("enter drop")
+	await get_tree().process_frame
+	print(ArenaState.instance.card_used_wand_index)
+	if ArenaState.instance.card_used_wand_index != -1:
+		print("wand slot %d use card" % ArenaState.instance.card_used_wand_index)
+		var wand_item = wand_container.get_wand_item(ArenaState.instance.card_used_wand_index) as WandItem
+		wand_item.use_card(current_card)
+		card_container.remove_card(current_card)
+
 	state_machine.change_state(state_idle)
 
 func leave_state_drop():
-	pass
+	current_card = null
+	ArenaState.instance.card_used_wand_index = -1
 #endregion

@@ -20,4 +20,4 @@ func _exit_tree():
 		instance = null
 #endregion
 
-signal start_use_card
+var card_used_wand_index: int = -1

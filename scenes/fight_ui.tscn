@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvo8laxsufq68"]
+[gd_scene load_steps=7 format=3 uid="uid://cvo8laxsufq68"]
 
 [ext_resource type="PackedScene" uid="uid://c5p44pg763we5" path="res://scenes/card.tscn" id="1_0e1rg"]
 [ext_resource type="Script" uid="uid://dpptvtawk51jh" path="res://scenes/card_container.gd" id="1_hdvm0"]
 [ext_resource type="Script" uid="uid://caxq6474sag26" path="res://scenes/fight_ui.gd" id="1_mg66j"]
+[ext_resource type="PackedScene" uid="uid://s8lnhblfx2w3" path="res://scenes/wand_container.tscn" id="4_rksgv"]
 [ext_resource type="PackedScene" uid="uid://wya6y4wwhefh" path="res://scenes/card_shower.tscn" id="4_yskse"]
 
 [sub_resource type="Curve" id="Curve_yskse"]
@@ -239,6 +240,9 @@ offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
+[node name="WandContainer" parent="." instance=ExtResource("4_rksgv")]
+layout_mode = 1
+
 [node name="DraggingLineContainer" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
@@ -254,16 +258,3 @@ default_color = Color(0.6621677, 0.0010432821, 0.7750008, 1)
 layout_mode = 1
 anchor_bottom = 0.846
 offset_bottom = 0.0
-
-[node name="WandContainer" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -20.0
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 2

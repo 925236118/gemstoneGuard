@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://cocbjnf8bnxxr"]
+
+[ext_resource type="Script" uid="uid://psepd7hlupx0" path="res://scenes/wand_item.gd" id="1_sdpp6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sdpp6"]
+font_size = 32
+
+[node name="WandItem" type="PanelContainer"]
+custom_minimum_size = Vector2(300, 100)
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -22.5
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("1_sdpp6")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "+"
+label_settings = SubResource("LabelSettings_sdpp6")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

@@ -74,6 +74,11 @@ func _on_card_mouse_entered(card: Card):
 	show_card.emit(card.get_index())
 
 # 鼠标移出后显示该卡牌，并隐藏展示卡牌节点
-func _on_card_mouse_exited(card: Card):
+func _on_card_mouse_exited(_card: Card):
 	#card.set_texture_visible(true)
 	show_card.emit(-1)
+
+func remove_card(card: Card):
+	card.queue_free()
+	await get_tree().process_frame
+	call_deferred("update_cards_position")
