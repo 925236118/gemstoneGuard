@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://w8oxbhtvclrc"
-path="res://.godot/imported/tower-round-bottom-a.fbx-dda5b75861088a7176eb40eef392a145.scn"
+path="res://.godot/imported/tower-round-bottom.fbx-ae08bab09cc50a38cca97952fe4723a8.scn"
 
 [deps]
 
-source_file="res://assets/models/tower-round-bottom-a.fbx"
-dest_files=["res://.godot/imported/tower-round-bottom-a.fbx-dda5b75861088a7176eb40eef392a145.scn"]
+source_file="res://assets/models/tower-round-bottom.fbx"
+dest_files=["res://.godot/imported/tower-round-bottom.fbx-ae08bab09cc50a38cca97952fe4723a8.scn"]
 
 [params]
 

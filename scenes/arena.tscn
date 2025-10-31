@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dp3juql3vwnri"]
+[gd_scene load_steps=10 format=3 uid="uid://dp3juql3vwnri"]
 
 [ext_resource type="PackedScene" uid="uid://bsrfuweqkt5ib" path="res://scenes/gemstone.tscn" id="1_e05a3"]
 [ext_resource type="PackedScene" uid="uid://cvo8laxsufq68" path="res://scenes/fight_ui.tscn" id="2_wl4x5"]
+[ext_resource type="Script" uid="uid://dqi5jwdgs4o4s" path="res://globals/ArenaState.gd" id="3_olpmc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e05a3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -26,6 +27,10 @@ size = Vector2(200, 200)
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_e05a3"]
 
 [node name="Arena" type="Node3D"]
+
+[node name="ArenaState" type="Node" parent="."]
+script = ExtResource("3_olpmc")
+metadata/_custom_type_script = "uid://dqi5jwdgs4o4s"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_olpmc")

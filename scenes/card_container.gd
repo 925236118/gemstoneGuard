@@ -64,12 +64,16 @@ func connect_card_signals(card: Card):
 	card.hover.connect(_on_card_mouse_entered.bind(card))
 	card.hover_end.connect(_on_card_mouse_exited.bind(card))
 
+func set_card_texture_visible(index: int):
+	for card in get_children():
+		card.set_texture_visible(card.get_index() != index)
+
 # 鼠标移入后隐藏该卡牌，并显示展示卡牌节点
 func _on_card_mouse_entered(card: Card):
-	card.set_texture_visible(false)
+	#card.set_texture_visible(false)
 	show_card.emit(card.get_index())
 
 # 鼠标移出后显示该卡牌，并隐藏展示卡牌节点
 func _on_card_mouse_exited(card: Card):
-	card.set_texture_visible(true)
+	#card.set_texture_visible(true)
 	show_card.emit(-1)
