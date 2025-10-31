@@ -14,3 +14,8 @@ config/name="宝石守卫"
 run/main_scene="uid://dp3juql3vwnri"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080

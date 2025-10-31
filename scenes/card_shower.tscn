@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://wya6y4wwhefh"]
+
+[ext_resource type="Script" uid="uid://bw1n04cxv35n3" path="res://scenes/card_shower.gd" id="1_wvgl0"]
+
+[node name="CardShower" type="Control"]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.846
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_wvgl0")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2

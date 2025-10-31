@@ -17,7 +17,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e05a3"]
-albedo_color = Color(0.5202933, 0.45021445, 0.24717396, 1)
+albedo_color = Color(0.07327231, 0.42372522, 0.3867522, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_e05a3"]
 material = SubResource("StandardMaterial3D_e05a3")
@@ -51,4 +51,4 @@ transform = Transform3D(1, 0, 0, 0, 0.6907058, 0.72313595, 0, -0.72313595, 0.690
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" parent="CanvasLayer" instance=ExtResource("2_wl4x5")]
+[node name="FightUI" parent="CanvasLayer" instance=ExtResource("2_wl4x5")]

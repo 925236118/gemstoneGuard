@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvo8laxsufq68"]
+[gd_scene load_steps=3 format=3 uid="uid://cvo8laxsufq68"]
 
 [ext_resource type="PackedScene" uid="uid://c5p44pg763we5" path="res://scenes/card.tscn" id="1_0e1rg"]
 [ext_resource type="Script" uid="uid://dpptvtawk51jh" path="res://scenes/card_container.gd" id="1_hdvm0"]
-[ext_resource type="Script" uid="uid://caxq6474sag26" path="res://scenes/fight_ui.gd" id="1_mg66j"]
-[ext_resource type="PackedScene" uid="uid://wya6y4wwhefh" path="res://scenes/card_shower.tscn" id="4_yskse"]
 
 [node name="FightUI" type="Control"]
 layout_mode = 3
@@ -13,7 +11,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_mg66j")
 
 [node name="MouseDropMask" type="Control" parent="."]
 layout_mode = 1
@@ -274,8 +271,3 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
-
-[node name="CardShower" parent="." instance=ExtResource("4_yskse")]
-layout_mode = 1
-anchor_bottom = 0.846
-offset_bottom = 0.0
