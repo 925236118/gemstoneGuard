@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dweqjmkeaqbhn"]
+
+[ext_resource type="PackedScene" uid="uid://doav7bqu8j1an" path="res://scenes/weapon/weapon_base.tscn" id="1_nt0d2"]
+[ext_resource type="PackedScene" uid="uid://obufh7rvuxvn" path="res://assets/models/weapons/shield_round.fbx" id="2_ct6uq"]
+
+[node name="WeaponShield" instance=ExtResource("1_nt0d2")]
+
+[node name="shield_round" parent="." index="0" instance=ExtResource("2_ct6uq")]

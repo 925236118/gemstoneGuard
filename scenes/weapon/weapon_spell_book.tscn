@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1whv81xt4vd4"]
+
+[ext_resource type="PackedScene" uid="uid://doav7bqu8j1an" path="res://scenes/weapon/weapon_base.tscn" id="1_jvbgs"]
+[ext_resource type="PackedScene" uid="uid://dxi8ba30cbrc" path="res://assets/models/weapons/spellbook_closed.fbx" id="2_xj0af"]
+
+[node name="WeaponSpellBook" instance=ExtResource("1_jvbgs")]
+
+[node name="spellbook_closed" parent="." index="0" instance=ExtResource("2_xj0af")]

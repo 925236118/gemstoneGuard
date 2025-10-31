@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjrieijrkoua1"]
+
+[ext_resource type="Script" uid="uid://cnxfb8y7eft67" path="res://scenes/weapon/weapon_container.gd" id="1_saxfk"]
+
+[node name="WeaponContainer" type="Node3D"]
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, 0, 0, 0)
+script = ExtResource("1_saxfk")

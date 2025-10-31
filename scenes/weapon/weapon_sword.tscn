@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6bu2box65n8o"]
+
+[ext_resource type="PackedScene" uid="uid://doav7bqu8j1an" path="res://scenes/weapon/weapon_base.tscn" id="1_ssrph"]
+[ext_resource type="PackedScene" uid="uid://cr1cx8oheybha" path="res://assets/models/weapons/sword_1handed.fbx" id="2_2mg1v"]
+
+[node name="WeaponSword" instance=ExtResource("1_ssrph")]
+
+[node name="sword_1handed" parent="." index="0" instance=ExtResource("2_2mg1v")]

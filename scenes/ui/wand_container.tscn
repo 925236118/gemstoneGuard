@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://s8lnhblfx2w3"]
 
-[ext_resource type="PackedScene" uid="uid://cocbjnf8bnxxr" path="res://scenes/wand_item.tscn" id="1_6ylro"]
-[ext_resource type="Script" uid="uid://c1ov81artbf23" path="res://scenes/wand_container.gd" id="1_d7epq"]
+[ext_resource type="PackedScene" uid="uid://cocbjnf8bnxxr" path="res://scenes/ui/wand_item.tscn" id="1_6ylro"]
+[ext_resource type="Script" uid="uid://c1ov81artbf23" path="res://scenes/ui/wand_container.gd" id="1_d7epq"]
 
 [node name="WandContainer" type="Control"]
 custom_minimum_size = Vector2(300, 600)

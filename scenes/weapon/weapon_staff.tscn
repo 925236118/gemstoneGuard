@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6l0tnljsfh4l"]
+
+[ext_resource type="PackedScene" uid="uid://doav7bqu8j1an" path="res://scenes/weapon/weapon_base.tscn" id="1_jkpbb"]
+[ext_resource type="PackedScene" uid="uid://ceurg1alrk8dy" path="res://assets/models/weapons/staff.fbx" id="2_bd23k"]
+
+[node name="WeaponStaff" instance=ExtResource("1_jkpbb")]
+
+[node name="staff" parent="." index="0" instance=ExtResource("2_bd23k")]

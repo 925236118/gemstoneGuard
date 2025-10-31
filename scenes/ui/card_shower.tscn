@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://wya6y4wwhefh"]
 
-[ext_resource type="Script" uid="uid://bw1n04cxv35n3" path="res://scenes/card_shower.gd" id="1_wvgl0"]
+[ext_resource type="Script" uid="uid://bw1n04cxv35n3" path="res://scenes/ui/card_shower.gd" id="1_wvgl0"]
 
 [node name="CardShower" type="Control"]
 layout_mode = 3
