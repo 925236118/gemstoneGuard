@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c5p44pg763we5" path="res://scenes/card.tscn" id="1_0e1rg"]
 [ext_resource type="Script" uid="uid://dpptvtawk51jh" path="res://scenes/card_container.gd" id="1_hdvm0"]
-[ext_resource type="Script" uid="uid://caxq6474sag26" path="res://scenes/fight_ui.gd" id="1_mg66j"]
+[ext_resource type="Script" path="res://scenes/fight_ui.gd" id="1_mg66j"]
 [ext_resource type="PackedScene" uid="uid://s8lnhblfx2w3" path="res://scenes/wand_container.tscn" id="4_rksgv"]
 [ext_resource type="PackedScene" uid="uid://wya6y4wwhefh" path="res://scenes/card_shower.tscn" id="4_yskse"]
 

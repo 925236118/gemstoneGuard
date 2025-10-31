@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dp3juql3vwnri"]
+[gd_scene load_steps=12 format=3 uid="uid://dp3juql3vwnri"]
 
 [ext_resource type="PackedScene" uid="uid://bsrfuweqkt5ib" path="res://scenes/gemstone.tscn" id="1_e05a3"]
 [ext_resource type="PackedScene" uid="uid://cvo8laxsufq68" path="res://scenes/fight_ui.tscn" id="2_wl4x5"]
-[ext_resource type="Script" uid="uid://dqi5jwdgs4o4s" path="res://globals/ArenaState.gd" id="3_olpmc"]
+[ext_resource type="Script" path="res://globals/ArenaState.gd" id="3_olpmc"]
+[ext_resource type="PackedScene" uid="uid://bokkcfx4ejr16" path="res://scenes/enemy.tscn" id="4_xdvfk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e05a3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,6 +18,12 @@ sky = SubResource("Sky_wl4x5")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_olpmc"]
+vertices = PackedVector3Array(-99.25, 0.5, 0, -2.25, 0.5, 0, -2.25, 0.5, -1.25, -1.25, 0.5, -2.25, 0, 0.5, -2.25, 0, 0.5, -99.25, -99.25, 0.5, -99.25, 2.25, 0.5, -1.25, 2.5, 0.5, 0, 99.25, 0.5, 0, 1.25, 0.5, -2.25, 99.25, 0.5, -99.25, -0.25, 6.25, -0.25, -0.25, 6.25, 0.25, 0.25, 6.25, 0.25, 0.25, 6.25, -0.25, 0, 0.5, 99.25, 0, 0.5, 2.25, -1.25, 0.5, 2.25, -2.25, 0.5, 1.25, -99.25, 0.5, 99.25, 2.25, 0.5, 1.25, 1.25, 0.5, 2.25, 99.25, 0.5, 99.25)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 6), PackedInt32Array(3, 6, 5), PackedInt32Array(9, 8, 7), PackedInt32Array(10, 4, 5), PackedInt32Array(10, 5, 7), PackedInt32Array(7, 5, 11), PackedInt32Array(7, 11, 9), PackedInt32Array(15, 14, 12), PackedInt32Array(12, 14, 13), PackedInt32Array(18, 17, 16), PackedInt32Array(0, 1, 19), PackedInt32Array(18, 16, 19), PackedInt32Array(19, 16, 20), PackedInt32Array(19, 20, 0), PackedInt32Array(21, 8, 9), PackedInt32Array(16, 17, 22), PackedInt32Array(21, 9, 22), PackedInt32Array(22, 9, 23), PackedInt32Array(22, 23, 16)]
+agent_height = 2.0
+agent_radius = 0.6
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e05a3"]
 albedo_color = Color(0.07327231, 0.42372522, 0.3867522, 1)
 
@@ -30,7 +37,6 @@ size = Vector2(200, 200)
 
 [node name="ArenaState" type="Node" parent="."]
 script = ExtResource("3_olpmc")
-metadata/_custom_type_script = "uid://dqi5jwdgs4o4s"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_olpmc")
@@ -39,21 +45,51 @@ environment = SubResource("Environment_olpmc")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="GemStone" parent="." instance=ExtResource("1_e05a3")]
-
-[node name="Ground" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_e05a3")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_e05a3")
-
 [node name="CameraContainer" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraContainer"]
-transform = Transform3D(1, 0, 0, 0, 0.6907058, 0.72313595, 0, -0.72313595, 0.6907058, 0, 5.244836, 5.5035744)
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 29.30886, 25.811426)
+projection = 1
+size = 30.0
+near = 2.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="FightUI" parent="CanvasLayer" instance=ExtResource("2_wl4x5")]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_olpmc")
+
+[node name="GemStone" parent="NavigationRegion3D" instance=ExtResource("1_e05a3")]
+
+[node name="Ground" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_e05a3")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ground/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_e05a3")
+
+[node name="EnemyContainer" type="Node3D" parent="."]
+
+[node name="Enemy" parent="EnemyContainer" instance=ExtResource("4_xdvfk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.666882, 0, -12.516521)
+
+[node name="Enemy2" parent="EnemyContainer" instance=ExtResource("4_xdvfk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.054981, 0, 9.338776)
+
+[node name="Enemy3" parent="EnemyContainer" instance=ExtResource("4_xdvfk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.671093, 0, 24.05636)
+
+[node name="Enemy4" parent="EnemyContainer" instance=ExtResource("4_xdvfk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.111076, 0, 5.4835854)
+
+[node name="Enemy5" parent="EnemyContainer" instance=ExtResource("4_xdvfk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.167248, 0, 6.9830284)
+
+[node name="Enemy6" parent="EnemyContainer" instance=ExtResource("4_xdvfk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.878342, 0, -44.958317)
+
+[node name="Enemy7" parent="EnemyContainer" instance=ExtResource("4_xdvfk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.739496, 0, -18.888403)

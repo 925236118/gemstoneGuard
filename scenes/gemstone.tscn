@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bsrfuweqkt5ib"]
+[gd_scene load_steps=14 format=3 uid="uid://bsrfuweqkt5ib"]
 
 [ext_resource type="PackedScene" uid="uid://w8oxbhtvclrc" path="res://assets/models/tower-round-bottom.fbx" id="1_yi24a"]
 [ext_resource type="PackedScene" uid="uid://ccfo8k1k8rgfn" path="res://assets/models/Gem_Medium.fbx" id="2_hblqw"]
@@ -68,20 +68,25 @@ _data = {
 &"loop": SubResource("Animation_hblqw")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hblqw"]
+
 [node name="GemStone" type="Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 
 [node name="GemContainer" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="GemLarge" parent="GemContainer" instance=ExtResource("2_qgbp5")]
+visible = false
 
 [node name="GemMedium" parent="GemContainer" instance=ExtResource("2_hblqw")]
 visible = false
 
 [node name="GemSmall" parent="GemContainer" instance=ExtResource("3_wqmo7")]
-visible = false
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="GemContainer"]
+visible = false
+emitting = false
 amount = 20
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_3ysak")
@@ -94,3 +99,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_wqmo7")
 }
 autoplay = "loop"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40130085, 0)
+shape = SubResource("CapsuleShape3D_hblqw")
