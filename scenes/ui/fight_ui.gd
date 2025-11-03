@@ -56,15 +56,23 @@ func state_hover(_delta: float):
 	card_container.set_card_texture_visible(showing_card_index)
 	if showing_card_index != -1:
 		var card := cards[showing_card_index] as Card
+		for card_index in cards.size():
+			if card_index == showing_card_index:
+				continue
+			var other_card = cards[card_index] as Card
+			other_card.stop_card_texture_animation()
+		card.play_card_texture_animation()
 		card_shower.set_texture(card.get_texture())
 		card_shower.set_shower_position(card.position)
 	else:
+		for card in cards:
+			card.stop_card_texture_animation()
 		card_shower.set_texture(null)
 		state_machine.change_state(state_idle)
 
 
 	# 点击左键时切换到拖拽状态
-	if Input.is_action_just_pressed("mouse_click"):
+	if Input.is_action_just_released("mouse_click"):
 		drag_mouse_pos = get_global_mouse_position()
 		state_machine.change_state(state_dragging)
 		current_card = cards[showing_card_index]
@@ -80,11 +88,12 @@ func leave_state_hover():
 func state_dragging(_delta: float):
 	var curr_mouse_pos = get_global_mouse_position()
 	if Input.is_action_just_released("mouse_click"):
-		# 如果拖拽距离大于DROP_DISTANCE，则切换到放置状态
-		# 否则不切换，可以在原位置点击
-		const DROP_DISTANCE = 10
-		if (curr_mouse_pos - drag_mouse_pos).length() > DROP_DISTANCE:
-			state_machine.change_state(state_drop)
+		## 如果拖拽距离大于DROP_DISTANCE，则切换到放置状态
+		## 否则不切换，可以在原位置点击
+		# 由于拖动后不能触发weapon container的事件 所以暂时删除拖动逻辑
+		#const DROP_DISTANCE = 10
+		#if (curr_mouse_pos - drag_mouse_pos).length() > DROP_DISTANCE:
+		state_machine.change_state(state_drop)
 	# 如果按下取消键，则切换到待机状态
 	if Input.is_action_just_pressed("mouse_cancel"):
 		state_machine.change_state(state_idle)
@@ -115,13 +124,19 @@ func state_drop(_delta: float):
 func enter_state_drop():
 	print("enter drop")
 	await get_tree().process_frame
-	print(ArenaState.instance.card_used_wand_index)
 	if ArenaState.instance.card_used_wand_index != -1:
-		print("wand slot %d use card" % ArenaState.instance.card_used_wand_index)
-		var wand_item = wand_container.get_wand_item(ArenaState.instance.card_used_wand_index) as WandItem
-		wand_item.use_card(current_card)
-		card_container.remove_card(current_card)
-
+		var card_data = current_card.card_data as CardData
+		if card_data and card_data.type == CardData.CardType.WEAPON:
+			print("wand slot %d use card" % ArenaState.instance.card_used_wand_index)
+			var wand_item = wand_container.get_wand_item(ArenaState.instance.card_used_wand_index) as WandItem
+			wand_item.use_card(current_card)
+			var old_card_data = ArenaState.instance.weapon_container.replace_weapon(ArenaState.instance.card_used_wand_index, current_card)
+			if old_card_data != null:
+				print("需要放到弃牌堆")
+				card_container.add_card(old_card_data)
+			card_container.remove_card(current_card)
+		else:
+			print("错误的卡牌类型")
 	state_machine.change_state(state_idle)
 
 func leave_state_drop():

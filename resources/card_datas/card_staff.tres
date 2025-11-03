@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://cmg4wfw072knw"]
+
+[ext_resource type="Script" uid="uid://cx486y4rplw34" path="res://scripts/resources/card_data.gd" id="1_3ppro"]
+[ext_resource type="PackedScene" uid="uid://b6l0tnljsfh4l" path="res://scenes/weapon/weapon_staff.tscn" id="2_f12uk"]
+
+[resource]
+resource_name = "CardDataStaff"
+script = ExtResource("1_3ppro")
+type = 1
+name = "法杖"
+description = "一柄法杖"
+weapon = ExtResource("2_f12uk")
+metadata/_custom_type_script = "uid://cx486y4rplw34"

@@ -9,4 +9,4 @@ func _on_gui_input(event: InputEvent) -> void:
 		ArenaState.instance.card_used_wand_index = get_index()
 
 func use_card(card: Card):
-	label.text = card.name
+	label.text = card.card_data.name

@@ -1,7 +1,53 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5p44pg763we5"]
+[gd_scene load_steps=9 format=3 uid="uid://c5p44pg763we5"]
 
 [ext_resource type="Script" uid="uid://lid773y11c3a" path="res://scenes/ui/card.gd" id="1_d81rb"]
 [ext_resource type="Texture2D" uid="uid://cgtynqkpkfycv" path="res://icon.svg" id="2_6u4wf"]
+[ext_resource type="Texture2D" uid="uid://d3fvtgef06lnf" path="res://assets/ui/fantasy-ui-borders.svg" id="3_ulu11"]
+
+[sub_resource type="Environment" id="Environment_mli0n"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="World3D" id="World3D_ulu11"]
+environment = SubResource("Environment_mli0n")
+
+[sub_resource type="Animation" id="Animation_ulu11"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraContainer:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mli0n"]
+resource_name = "loop"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraContainer:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ulu11"]
+_data = {
+&"RESET": SubResource("Animation_ulu11"),
+&"loop": SubResource("Animation_mli0n")
+}
 
 [node name="Card" type="Control"]
 layout_mode = 3
@@ -62,8 +108,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+color = Color(0.646029, 0.646029, 0.646029, 1)
 
 [node name="TextureRect" type="TextureRect" parent="TextureContainer/SubViewportContainer/SubViewport/TextureControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,6 +121,70 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("2_6u4wf")
 expand_mode = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TextureContainer/SubViewportContainer/SubViewport/TextureControl"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ulu11")
+region_rect = Rect2(350, 424, 48, 48)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureContainer/SubViewportContainer/SubViewport/TextureControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="TextureContainer/SubViewportContainer/SubViewport/TextureControl/MarginContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="TextureContainer/SubViewportContainer/SubViewport/TextureControl/MarginContainer/SubViewportContainer"]
+own_world_3d = true
+world_3d = SubResource("World3D_ulu11")
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(130, 180)
+render_target_update_mode = 4
+
+[node name="CardTextureSceneConrainer" type="Node3D" parent="TextureContainer/SubViewportContainer/SubViewport/TextureControl/MarginContainer/SubViewportContainer/SubViewport"]
+
+[node name="CameraContainer" type="Node3D" parent="TextureContainer/SubViewportContainer/SubViewport/TextureControl/MarginContainer/SubViewportContainer/SubViewport/CardTextureSceneConrainer"]
+
+[node name="Camera3D" type="Camera3D" parent="TextureContainer/SubViewportContainer/SubViewport/TextureControl/MarginContainer/SubViewportContainer/SubViewport/CardTextureSceneConrainer/CameraContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextureContainer/SubViewportContainer/SubViewport/TextureControl/MarginContainer/SubViewportContainer/SubViewport/CardTextureSceneConrainer"]
+libraries = {
+&"": SubResource("AnimationLibrary_ulu11")
+}
+
+[node name="LableContainer" type="VBoxContainer" parent="TextureContainer/SubViewportContainer/SubViewport/TextureControl/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="CardName" type="Label" parent="TextureContainer/SubViewportContainer/SubViewport/TextureControl/MarginContainer/LableContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "名字"
+
+[node name="CardDescription" type="Label" parent="TextureContainer/SubViewportContainer/SubViewport/TextureControl/MarginContainer/LableContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "介绍"
 
 [connection signal="gui_input" from="TextureContainer" to="." method="_on_texture_container_gui_input"]
 [connection signal="mouse_entered" from="TextureContainer" to="." method="_on_texture_container_mouse_entered"]

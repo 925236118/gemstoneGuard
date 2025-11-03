@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvo8laxsufq68"]
+[gd_scene load_steps=11 format=3 uid="uid://cvo8laxsufq68"]
 
 [ext_resource type="PackedScene" uid="uid://c5p44pg763we5" path="res://scenes/ui/card.tscn" id="1_0e1rg"]
 [ext_resource type="Script" uid="uid://dpptvtawk51jh" path="res://scenes/ui/card_container.gd" id="1_hdvm0"]
 [ext_resource type="Script" uid="uid://caxq6474sag26" path="res://scenes/ui/fight_ui.gd" id="1_mg66j"]
+[ext_resource type="Resource" uid="uid://db7sjasp6eshl" path="res://resources/card_datas/card_sword.tres" id="4_668d4"]
 [ext_resource type="PackedScene" uid="uid://s8lnhblfx2w3" path="res://scenes/ui/wand_container.tscn" id="4_rksgv"]
 [ext_resource type="PackedScene" uid="uid://wya6y4wwhefh" path="res://scenes/ui/card_shower.tscn" id="4_yskse"]
+[ext_resource type="Resource" uid="uid://kdakl74cribb" path="res://resources/card_datas/card_shield.tres" id="5_2iu2j"]
+[ext_resource type="Resource" uid="uid://cpqek4niqipue" path="res://resources/card_datas/card_spell_book.tres" id="6_6yfje"]
+[ext_resource type="Resource" uid="uid://cmg4wfw072knw" path="res://resources/card_datas/card_staff.tres" id="7_s2mb2"]
 
 [sub_resource type="Curve" id="Curve_yskse"]
 _data = [Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.91277885, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -11.52546, 0.0, 0, 0]
@@ -49,6 +53,7 @@ anchor_right = 0.5
 offset_right = 0.0
 offset_bottom = 0.0
 grow_vertical = 0
+card_data = ExtResource("4_668d4")
 
 [node name="Card2" parent="CardContainer" instance=ExtResource("1_0e1rg")]
 layout_mode = 0
@@ -59,6 +64,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
+card_data = ExtResource("5_2iu2j")
 
 [node name="Card3" parent="CardContainer" instance=ExtResource("1_0e1rg")]
 layout_mode = 0
@@ -69,6 +75,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
+card_data = ExtResource("6_6yfje")
 
 [node name="Card4" parent="CardContainer" instance=ExtResource("1_0e1rg")]
 layout_mode = 0
@@ -79,166 +86,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
-
-[node name="Card5" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card6" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card7" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card8" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card9" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card10" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card11" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card12" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card13" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card14" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card15" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card16" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card17" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card18" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card19" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Card20" parent="CardContainer" instance=ExtResource("1_0e1rg")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+card_data = ExtResource("7_s2mb2")
 
 [node name="WandContainer" parent="." instance=ExtResource("4_rksgv")]
 layout_mode = 1

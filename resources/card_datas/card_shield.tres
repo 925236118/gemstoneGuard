@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://kdakl74cribb"]
+
+[ext_resource type="Script" uid="uid://cx486y4rplw34" path="res://scripts/resources/card_data.gd" id="1_ue0e1"]
+[ext_resource type="PackedScene" uid="uid://dweqjmkeaqbhn" path="res://scenes/weapon/weapon_shield.tscn" id="2_454xf"]
+
+[resource]
+resource_name = "CardDataShield"
+script = ExtResource("1_ue0e1")
+type = 1
+name = "圆盾"
+description = "圆盾，阻挡敌人靠近"
+weapon = ExtResource("2_454xf")
+metadata/_custom_type_script = "uid://cx486y4rplw34"

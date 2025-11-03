@@ -1,6 +1,8 @@
 class_name CardContainer
 extends Control
 
+const CARD = preload("uid://c5p44pg763we5")
+
 signal show_card(index: int)
 
 # 卡牌间最大间距
@@ -77,6 +79,15 @@ func _on_card_mouse_entered(card: Card):
 func _on_card_mouse_exited(_card: Card):
 	#card.set_texture_visible(true)
 	show_card.emit(-1)
+
+func add_card(card_data: CardData):
+	var card = CARD.instantiate() as Card
+	card.card_data = card_data
+	add_child(card)
+	card.hover.connect(_on_card_mouse_entered.bind(card))
+	card.hover_end.connect(_on_card_mouse_exited.bind(card))
+	update_cards_position()
+
 
 func remove_card(card: Card):
 	card.queue_free()

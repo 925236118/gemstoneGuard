@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://s8lnhblfx2w3"]
+[gd_scene load_steps=2 format=3 uid="uid://s8lnhblfx2w3"]
 
-[ext_resource type="PackedScene" uid="uid://cocbjnf8bnxxr" path="res://scenes/ui/wand_item.tscn" id="1_6ylro"]
 [ext_resource type="Script" uid="uid://c1ov81artbf23" path="res://scenes/ui/wand_container.gd" id="1_d7epq"]
 
 [node name="WandContainer" type="Control"]
@@ -28,12 +27,3 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 alignment = 1
-
-[node name="WandItem" parent="VBoxContainer" instance=ExtResource("1_6ylro")]
-layout_mode = 2
-
-[node name="WandItem2" parent="VBoxContainer" instance=ExtResource("1_6ylro")]
-layout_mode = 2
-
-[node name="WandItem3" parent="VBoxContainer" instance=ExtResource("1_6ylro")]
-layout_mode = 2

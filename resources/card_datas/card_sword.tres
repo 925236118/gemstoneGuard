@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://db7sjasp6eshl"]
+
+[ext_resource type="Script" uid="uid://cx486y4rplw34" path="res://scripts/resources/card_data.gd" id="1_wmog0"]
+[ext_resource type="PackedScene" uid="uid://c6bu2box65n8o" path="res://scenes/weapon/weapon_sword.tscn" id="2_tc2px"]
+
+[resource]
+resource_name = "CardDataSword"
+script = ExtResource("1_wmog0")
+type = 1
+name = "短剑"
+description = "一把短剑"
+weapon = ExtResource("2_tc2px")
+metadata/_custom_type_script = "uid://cx486y4rplw34"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://cpqek4niqipue"]
+
+[ext_resource type="Script" uid="uid://cx486y4rplw34" path="res://scripts/resources/card_data.gd" id="1_dyb2p"]
+[ext_resource type="PackedScene" uid="uid://b1whv81xt4vd4" path="res://scenes/weapon/weapon_spell_book.tscn" id="2_fttcw"]
+
+[resource]
+script = ExtResource("1_dyb2p")
+type = 1
+name = "法术书"
+description = "一本记载着上古咒语的书"
+weapon = ExtResource("2_fttcw")
+metadata/_custom_type_script = "uid://cx486y4rplw34"
