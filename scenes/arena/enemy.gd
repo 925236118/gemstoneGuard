@@ -19,9 +19,9 @@ func init_navigation_info():
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	
+
 	var direction := (navigation_agent_3d.get_next_path_position() - global_position).normalized()
-	
+
 	velocity.x = direction.x * SPEED
 	velocity.z = direction.z * SPEED
 	if navigation_agent_3d.distance_to_target() > 2.5:

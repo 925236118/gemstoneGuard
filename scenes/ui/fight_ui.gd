@@ -25,6 +25,8 @@ func _ready() -> void:
 	state_machine.add_states(state_dragging, enter_state_dragging, leave_state_dragging)
 	state_machine.add_states(state_drop, enter_state_drop, leave_state_drop)
 	state_machine.set_initial_state(state_idle)
+	for card_data in CardManager.instance.card_datas:
+		card_container.add_card(card_data)
 
 # 展示卡牌
 func _on_show_card(index: int):
@@ -97,24 +99,52 @@ func state_dragging(_delta: float):
 	# 如果按下取消键，则切换到待机状态
 	if Input.is_action_just_pressed("mouse_cancel"):
 		state_machine.change_state(state_idle)
-	# 绘制拖拽线
-	var curve_2d = Curve2D.new()
-	var vector = (curr_mouse_pos - card_shower.get_center_pos())
-	var rotate_angle = PI / 8
-	if vector.x > 0:
-		rotate_angle = -rotate_angle
-	curve_2d.add_point(card_shower.get_center_pos(), Vector2.ZERO, vector.normalized().rotated(rotate_angle) * vector.length() / 2.0, 0)
-	curve_2d.add_point(curr_mouse_pos, -vector.normalized().rotated(-rotate_angle) * vector.length() / 2.0, Vector2.ZERO, 1)
+	if current_card.card_data.type == CardData.CardType.WEAPON:
+		# 绘制拖拽线
+		var curve_2d = Curve2D.new()
+		var vector = (curr_mouse_pos - card_shower.get_center_pos())
+		var rotate_angle = PI / 8
+		if vector.x > 0:
+			rotate_angle = -rotate_angle
+		curve_2d.add_point(card_shower.get_center_pos(), Vector2.ZERO, vector.normalized().rotated(rotate_angle) * vector.length() / 2.0, 0)
+		curve_2d.add_point(curr_mouse_pos, -vector.normalized().rotated(-rotate_angle) * vector.length() / 2.0, Vector2.ZERO, 1)
 
-	line_2d.points = curve_2d.get_baked_points()
+		line_2d.points = curve_2d.get_baked_points()
+	elif current_card.card_data.type == CardData.CardType.SKILL:
+		var arena_camera = get_tree().root.get_camera_3d() as Camera3D
+		if arena_camera:
+			# 获取鼠标位置对应的 3D 射线
+			var mouse_pos = get_viewport().get_mouse_position()
+			var ray_origin = arena_camera.project_ray_origin(mouse_pos)
+			var ray_direction = arena_camera.project_ray_normal(mouse_pos)
+			var ray_length = 1000.0  # 射线长度
+
+			# 创建射线查询参数
+			var space_state = get_viewport().get_world_3d().direct_space_state
+			var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_origin + ray_direction * ray_length)
+
+			# 执行射线检测
+			var result = space_state.intersect_ray(query)
+
+			if result:
+				var hit_position = result.position  # 碰撞位置
+				var hit_object = result.collider  # 碰撞对象
+				# 判断碰撞的是地面还是敌人
+				if hit_object.is_in_group("enemy"):
+					print("射线击中敌人: ", hit_object.name, " 位置: ", hit_position)
+				elif hit_object.is_in_group("ground"):
+					print("射线击中地面位置: ", hit_position)
+				else:
+					print("射线击中其他对象: ", hit_object.name, " 位置: ", hit_position)
+
 
 func enter_state_dragging():
 	print("enter dragging")
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	# Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 func leave_state_dragging():
 	line_2d.points = []
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	# Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	pass
 
 # 放置状态

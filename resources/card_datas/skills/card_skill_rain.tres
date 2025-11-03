@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://cedd1qwxu4qq0"]
+
+[ext_resource type="Script" uid="uid://cx486y4rplw34" path="res://scripts/resources/card_data.gd" id="1_ktixg"]
+[ext_resource type="Texture2D" uid="uid://cgtynqkpkfycv" path="res://icon.svg" id="2_eqkpo"]
+
+[resource]
+script = ExtResource("1_ktixg")
+type = 2
+name = "暴雨术"
+description = "使用暴雨来攻击敌人"
+skill_type = 1
+skill_icon = ExtResource("2_eqkpo")
+skill_range = 3
+metadata/_custom_type_script = "uid://cx486y4rplw34"

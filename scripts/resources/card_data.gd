@@ -10,6 +10,14 @@ enum CardType {
 	BUFF
 }
 
+enum SkillType {
+	NONE,
+	CIRCLE,
+	SINGLE,
+	RAY
+}
+
+@export_group("common")
 @export var type: CardType = CardType.NONE
 
 # 卡牌名称
@@ -26,3 +34,11 @@ enum CardType {
 
 # 增益
 @export var buff: PackedScene = null
+
+@export_group("skill", "skill")
+# 技能类型
+@export var skill_type: SkillType = SkillType.NONE
+# 技能图标
+@export var skill_icon: Texture2D = null
+# 技能范围
+@export var skill_range: int = 0

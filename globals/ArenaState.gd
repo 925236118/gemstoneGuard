@@ -25,3 +25,5 @@ var card_used_wand_index: int = -1
 var weapon_container: WeaponContainer = null
 
 var weapon_count = 3
+
+@onready var arena_scene = get_parent()

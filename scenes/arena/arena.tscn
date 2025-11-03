@@ -1,9 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://dp3juql3vwnri"]
+[gd_scene load_steps=15 format=3 uid="uid://dp3juql3vwnri"]
 
 [ext_resource type="Script" uid="uid://dqi5jwdgs4o4s" path="res://globals/ArenaState.gd" id="1_aj7ud"]
+[ext_resource type="Script" uid="uid://538aj1d5cv0l" path="res://scenes/arena/arena.gd" id="1_jx0ua"]
 [ext_resource type="PackedScene" uid="uid://cvo8laxsufq68" path="res://scenes/ui/fight_ui.tscn" id="2_asdgj"]
+[ext_resource type="Script" uid="uid://ongaibpbbxyx" path="res://globals/CardManager.gd" id="2_jx0ua"]
 [ext_resource type="PackedScene" uid="uid://bsrfuweqkt5ib" path="res://scenes/arena/gemstone.tscn" id="3_jx0ua"]
 [ext_resource type="PackedScene" uid="uid://bokkcfx4ejr16" path="res://scenes/arena/enemy.tscn" id="4_u52cf"]
+[ext_resource type="PackedScene" uid="uid://bgqebw6m5jxfs" path="res://resources/indicator/round.tscn" id="7_u52cf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e05a3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -34,9 +37,15 @@ size = Vector2(200, 200)
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_e05a3"]
 
 [node name="Arena" type="Node3D"]
+script = ExtResource("1_jx0ua")
 
 [node name="ArenaState" type="Node" parent="."]
 script = ExtResource("1_aj7ud")
+metadata/_custom_type_script = "uid://dqi5jwdgs4o4s"
+
+[node name="CardManager" type="Node" parent="."]
+script = ExtResource("2_jx0ua")
+metadata/_custom_type_script = "uid://ongaibpbbxyx"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_olpmc")
@@ -62,13 +71,13 @@ navigation_mesh = SubResource("NavigationMesh_olpmc")
 
 [node name="GemStone" parent="NavigationRegion3D" instance=ExtResource("3_jx0ua")]
 
-[node name="Ground" type="MeshInstance3D" parent="NavigationRegion3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D" groups=["ground"]]
+
+[node name="Ground" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
 mesh = SubResource("PlaneMesh_e05a3")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Ground"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ground/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_e05a3")
 
 [node name="EnemyContainer" type="Node3D" parent="."]
@@ -93,3 +102,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.878342, 0, -44.958317)
 
 [node name="Enemy7" parent="EnemyContainer" instance=ExtResource("4_u52cf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.739496, 0, -18.888403)
+
+[node name="IndicatorRound" parent="." instance=ExtResource("7_u52cf")]
+visible = false
