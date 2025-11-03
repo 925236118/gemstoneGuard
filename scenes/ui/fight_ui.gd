@@ -131,11 +131,14 @@ func state_dragging(_delta: float):
 				var hit_object = result.collider  # 碰撞对象
 				# 判断碰撞的是地面还是敌人
 				if hit_object.is_in_group("enemy"):
-					print("射线击中敌人: ", hit_object.name, " 位置: ", hit_position)
+					print("射线击中敌人: ", hit_object.name, " 位置: ", hit_object)
+					ArenaState.instance.arena_scene.update_indicator(hit_object.global_position, current_card.card_data.skill_range)
 				elif hit_object.is_in_group("ground"):
 					print("射线击中地面位置: ", hit_position)
+					ArenaState.instance.arena_scene.update_indicator(hit_position, current_card.card_data.skill_range)
 				else:
 					print("射线击中其他对象: ", hit_object.name, " 位置: ", hit_position)
+					ArenaState.instance.arena_scene.update_indicator(hit_object.global_position, current_card.card_data.skill_range)
 
 
 func enter_state_dragging():
@@ -144,6 +147,7 @@ func enter_state_dragging():
 
 func leave_state_dragging():
 	line_2d.points = []
+	ArenaState.instance.arena_scene.hide_indicator()
 	# Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	pass
 

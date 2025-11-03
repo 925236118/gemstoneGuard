@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://bgqebw6m5jxfs"]
+[gd_scene load_steps=9 format=4 uid="uid://bgqebw6m5jxfs"]
 
 [ext_resource type="PackedScene" uid="uid://2gdaegwvx5dd" path="res://assets/models/arena/indicator-round-d.fbx" id="1_7b1s7"]
 [ext_resource type="Script" uid="uid://b1av2172wo6wj" path="res://resources/indicator/round.gd" id="2_ofxju"]
@@ -46,6 +46,23 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_n1cbu")
 
+[sub_resource type="Animation" id="Animation_ofxju"]
+resource_name = "animation"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("indicator-round-d/rotate-y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.96666664, 1, 0, -0.9986295, 0, 0.052335944, 1.9333333, 1, 0, -0.10452241, 0, -0.9945225, 1.9666667, 1, 0, -0.052326884, 0, -0.99863, 2, 1, 0, -1.2246064e-16, 0, -1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n1cbu"]
+_data = {
+&"animation": SubResource("Animation_ofxju")
+}
+
 [node name="IndicatorRound" instance=ExtResource("1_7b1s7")]
 script = ExtResource("2_ofxju")
 
@@ -53,4 +70,7 @@ script = ExtResource("2_ofxju")
 mesh = SubResource("ArrayMesh_l7ccc")
 
 [node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_n1cbu")
+}
 autoplay = "animation"

@@ -26,4 +26,4 @@ var weapon_container: WeaponContainer = null
 
 var weapon_count = 3
 
-@onready var arena_scene = get_parent()
+@onready var arena_scene = get_parent() as Arena
