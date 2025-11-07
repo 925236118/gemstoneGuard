@@ -157,20 +157,23 @@ func state_drop(_delta: float):
 
 func enter_state_drop():
 	print("enter drop")
-	await get_tree().process_frame
-	if ArenaState.instance.card_used_wand_index != -1:
-		var card_data = current_card.card_data as CardData
-		if card_data and card_data.type == CardData.CardType.WEAPON:
-			print("wand slot %d use card" % ArenaState.instance.card_used_wand_index)
-			var wand_item = wand_container.get_wand_item(ArenaState.instance.card_used_wand_index) as WandItem
-			wand_item.use_card(current_card)
-			var old_card_data = ArenaState.instance.weapon_container.replace_weapon(ArenaState.instance.card_used_wand_index, current_card)
-			if old_card_data != null:
-				print("需要放到弃牌堆")
-				card_container.add_card(old_card_data)
-			card_container.remove_card(current_card)
-		else:
-			print("错误的卡牌类型")
+	if current_card.card_data.type == CardData.CardType.WEAPON:
+		await get_tree().process_frame
+		if ArenaState.instance.card_used_wand_index != -1:
+			var card_data = current_card.card_data as CardData
+			if card_data and card_data.type == CardData.CardType.WEAPON:
+				print("wand slot %d use card" % ArenaState.instance.card_used_wand_index)
+				var wand_item = wand_container.get_wand_item(ArenaState.instance.card_used_wand_index) as WandItem
+				wand_item.use_card(current_card)
+				var old_card_data = ArenaState.instance.weapon_container.replace_weapon(ArenaState.instance.card_used_wand_index, current_card)
+				if old_card_data != null:
+					print("需要放到弃牌堆")
+					card_container.add_card(old_card_data)
+				card_container.remove_card(current_card)
+			else:
+				print("错误的卡牌类型")
+	elif current_card.card_data.type == CardData.CardType.SKILL:
+		ArenaState.instance.arena_scene.use_skill_card(current_card)
 	state_machine.change_state(state_idle)
 
 func leave_state_drop():

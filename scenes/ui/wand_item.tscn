@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cocbjnf8bnxxr"]
 
-[ext_resource type="Script" uid="uid://psepd7hlupx0" path="res://scenes/wand_item.gd" id="1_sdpp6"]
+[ext_resource type="Script" uid="uid://psepd7hlupx0" path="res://scenes/ui/wand_item.gd" id="1_sdpp6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sdpp6"]
 font_size = 32

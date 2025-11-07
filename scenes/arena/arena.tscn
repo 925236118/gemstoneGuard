@@ -104,3 +104,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.739496, 0, -18.888403)
 
 [node name="IndicatorRound" parent="." instance=ExtResource("7_u52cf")]
 visible = false
+
+[node name="SkillContainer" type="Node3D" parent="."]
