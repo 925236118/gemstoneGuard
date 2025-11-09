@@ -29,5 +29,8 @@ func _exit_tree():
 
 	# 技能
 	load("uid://cedd1qwxu4qq0"), # 暴雨术
+	load("uid://dp6qurv72nbjv"), # 落雷qq
+	
+	
 
 ]

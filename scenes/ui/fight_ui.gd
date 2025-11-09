@@ -32,6 +32,26 @@ func _ready() -> void:
 func _on_show_card(index: int):
 	showing_card_index = index
 
+
+# 获取3D场景中鼠标指针所指的位置
+func get_mouse_raycast_result() -> Dictionary:
+	var camera_3d = get_tree().root.get_camera_3d() as Camera3D
+	if camera_3d:
+		# 获取鼠标位置对应的 3D 射线
+		var mouse_pos = get_viewport().get_mouse_position()
+		var ray_origin = camera_3d.project_ray_origin(mouse_pos)
+		var ray_direction = camera_3d.project_ray_normal(mouse_pos)
+		var ray_length = 1000.0  # 射线长度
+
+		# 创建射线查询参数
+		var space_state = get_viewport().get_world_3d().direct_space_state
+		var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_origin + ray_direction * ray_length)
+
+		# 执行射线检测
+		return space_state.intersect_ray(query)
+		 
+	return {}
+
 #region 状态相关
 var showing_card_index = -1
 var drag_mouse_pos = Vector2.ZERO
@@ -111,35 +131,37 @@ func state_dragging(_delta: float):
 
 		line_2d.points = curve_2d.get_baked_points()
 	elif current_card.card_data.type == CardData.CardType.SKILL:
-		var arena_camera = get_tree().root.get_camera_3d() as Camera3D
-		if arena_camera:
-			# 获取鼠标位置对应的 3D 射线
-			var mouse_pos = get_viewport().get_mouse_position()
-			var ray_origin = arena_camera.project_ray_origin(mouse_pos)
-			var ray_direction = arena_camera.project_ray_normal(mouse_pos)
-			var ray_length = 1000.0  # 射线长度
+		var params = Arena.IndicatorParams.new()
+		params.type = current_card.card_data.skill_type
+		params.pos = Vector3.ZERO
+		params.material = null
+		
+		var mouse_ray_result = get_mouse_raycast_result()
 
-			# 创建射线查询参数
-			var space_state = get_viewport().get_world_3d().direct_space_state
-			var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_origin + ray_direction * ray_length)
+		if current_card.card_data.skill_type == CardData.SkillType.CIRCLE:
+			params.scale_value = current_card.card_data.skill_range
 
-			# 执行射线检测
-			var result = space_state.intersect_ray(query)
-
-			if result:
-				var hit_position = result.position  # 碰撞位置
-				var hit_object = result.collider  # 碰撞对象
+			if mouse_ray_result.has("position"):
+				var hit_position = mouse_ray_result.position  # 碰撞位置
+				var hit_object = mouse_ray_result.collider  # 碰撞对象
 				# 判断碰撞的是地面还是敌人
-				if hit_object.is_in_group("enemy"):
-					print("射线击中敌人: ", hit_object.name, " 位置: ", hit_object)
-					ArenaState.instance.arena_scene.update_indicator(hit_object.global_position, current_card.card_data.skill_range)
-				elif hit_object.is_in_group("ground"):
-					print("射线击中地面位置: ", hit_position)
-					ArenaState.instance.arena_scene.update_indicator(hit_position, current_card.card_data.skill_range)
+				if hit_object.is_in_group("ground"):
+					#print("射线击中地面位置: ", hit_position)
+					params.pos = hit_position
+				elif hit_object.is_in_group("enemy"):
+					#print("射线击中敌人: ", hit_object.name, " 位置: ", hit_object)
+					params.pos = hit_object.global_position
 				else:
-					print("射线击中其他对象: ", hit_object.name, " 位置: ", hit_position)
-					ArenaState.instance.arena_scene.update_indicator(hit_object.global_position, current_card.card_data.skill_range)
-
+					#print("射线击中其他对象: ", hit_object.name, " 位置: ", hit_position)
+					params.pos = hit_object.global_position
+				ArenaState.instance.arena_scene.update_indicator(params)
+		elif current_card.card_data.skill_type == CardData.SkillType.SINGLE:
+			var hit_object = mouse_ray_result.collider  # 碰撞对象
+			if not hit_object.is_in_group("ground"):
+				params.pos = hit_object.global_position
+				ArenaState.instance.arena_scene.update_indicator(params)
+			else:
+				ArenaState.instance.arena_scene.hide_indicator()
 
 func enter_state_dragging():
 	print("enter dragging")

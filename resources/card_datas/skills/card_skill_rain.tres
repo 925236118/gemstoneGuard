@@ -12,4 +12,4 @@ description = "使用暴雨来攻击敌人"
 skill = ExtResource("2_1461b")
 skill_type = 1
 skill_icon = ExtResource("2_eqkpo")
-skill_range = 10
+skill_range = 3

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=4 uid="uid://bgqebw6m5jxfs"]
 
 [ext_resource type="PackedScene" uid="uid://2gdaegwvx5dd" path="res://assets/models/arena/indicator-round-d.fbx" id="1_7b1s7"]
-[ext_resource type="Script" uid="uid://b1av2172wo6wj" path="res://resources/indicator/round.gd" id="2_ofxju"]
+[ext_resource type="Script" uid="uid://b1av2172wo6wj" path="res://scenes/indicator/round.gd" id="2_ofxju"]
 [ext_resource type="Texture2D" uid="uid://bfk4ycdpim7po" path="res://assets/models/Textures/colormap.png" id="2_xx0l4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ofxju"]

@@ -1,10 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://bsrfuweqkt5ib"]
+[gd_scene load_steps=16 format=3 uid="uid://bsrfuweqkt5ib"]
 
 [ext_resource type="PackedScene" uid="uid://w8oxbhtvclrc" path="res://assets/models/tower-round-bottom.fbx" id="1_yi24a"]
 [ext_resource type="PackedScene" uid="uid://ccfo8k1k8rgfn" path="res://assets/models/Gem_Medium.fbx" id="2_hblqw"]
 [ext_resource type="PackedScene" uid="uid://qs812rwi3y3i" path="res://assets/models/Gem_Large.fbx" id="2_qgbp5"]
 [ext_resource type="PackedScene" uid="uid://xr3matkcs28l" path="res://assets/models/Gem_Small.fbx" id="3_wqmo7"]
 [ext_resource type="PackedScene" uid="uid://bjrieijrkoua1" path="res://scenes/weapon/weapon_container.tscn" id="5_ddp2r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ddp2r"]
+albedo_color = Color(1, 0.3420968, 0.24694669, 1)
 
 [sub_resource type="Curve" id="Curve_hblqw"]
 _data = [Vector2(0, 0.44669425), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -22,9 +25,9 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_wqmo7")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v5t6b"]
-albedo_color = Color(0.6513697, 0.5978556, 0.8402008, 1)
+albedo_color = Color(0.79607844, 0.84705883, 0, 1)
 emission_enabled = true
-emission = Color(0.32156864, 0.94509804, 1, 1)
+emission = Color(1, 0.78453815, 0.792481, 1)
 emission_energy_multiplier = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_2nftx"]
@@ -104,10 +107,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="GemLarge" parent="GemContainer" instance=ExtResource("2_qgbp5")]
 visible = false
 
+[node name="Gem_Large" parent="GemContainer/GemLarge" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ddp2r")
+
 [node name="GemMedium" parent="GemContainer" instance=ExtResource("2_hblqw")]
 visible = false
 
+[node name="Gem_Medium" parent="GemContainer/GemMedium" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ddp2r")
+
 [node name="GemSmall" parent="GemContainer" instance=ExtResource("3_wqmo7")]
+
+[node name="Gem_Small" parent="GemContainer/GemSmall" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ddp2r")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="GemContainer"]
 amount = 20
@@ -131,3 +143,7 @@ shape = SubResource("CapsuleShape3D_hblqw")
 
 [node name="WeaponContainer" parent="." instance=ExtResource("5_ddp2r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44232425, 0)
+
+[editable path="GemContainer/GemLarge"]
+[editable path="GemContainer/GemMedium"]
+[editable path="GemContainer/GemSmall"]

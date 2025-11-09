@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://dp6qurv72nbjv"]
+
+[ext_resource type="Script" path="res://scripts/resources/card_data.gd" id="1_1fy1u"]
+
+[resource]
+script = ExtResource("1_1fy1u")
+type = 2
+name = "落雷术"
+description = "召唤一个雷电劈中敌人"
+skill_type = 2

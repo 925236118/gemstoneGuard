@@ -1,0 +1,2 @@
+class_name IndicatorPoint
+extends Node3D
