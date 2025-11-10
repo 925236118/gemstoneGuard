@@ -49,7 +49,7 @@ func get_mouse_raycast_result() -> Dictionary:
 
 		# 执行射线检测
 		return space_state.intersect_ray(query)
-		 
+
 	return {}
 
 #region 状态相关
@@ -135,7 +135,7 @@ func state_dragging(_delta: float):
 		params.type = current_card.card_data.skill_type
 		params.pos = Vector3.ZERO
 		params.material = null
-		
+
 		var mouse_ray_result = get_mouse_raycast_result()
 
 		if current_card.card_data.skill_type == CardData.SkillType.CIRCLE:

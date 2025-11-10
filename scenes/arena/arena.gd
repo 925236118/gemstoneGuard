@@ -38,4 +38,6 @@ func use_skill_card(card: Card):
 	if card.card_data.skill_type == CardData.SkillType.CIRCLE:
 		skill_scene.position = indicator_round.position
 		skill_scene.set_skill_range(card.card_data.skill_range)
+	elif card.card_data.skill_type == CardData.SkillType.SINGLE:
+		skill_scene.position = indicator_point.position
 	skill_scene.play_animation()

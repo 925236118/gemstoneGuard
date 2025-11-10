@@ -1,33 +1,24 @@
-[gd_scene load_steps=13 format=4 uid="uid://dr4750epvt8y6"]
+[gd_scene load_steps=9 format=4 uid="uid://brcwe8s6f6a2d"]
 
-[ext_resource type="Script" uid="uid://ckcvt0jmsxx51" path="res://scenes/skills/skill_lighting.gd" id="1_c4vo0"]
-[ext_resource type="Shader" uid="uid://clrq3k171c5w0" path="res://resources/shaders/skills/mark_shader.tres" id="2_fodp2"]
-[ext_resource type="Shader" uid="uid://b6lvnorwa62m5" path="res://resources/shaders/skills/lighting_shader.tres" id="3_qbeuf"]
-[ext_resource type="Shader" uid="uid://w2b50uh6xnor" path="res://resources/shaders/skills/wave_shader.tres" id="4_fodp2"]
+[ext_resource type="Texture2D" uid="uid://staokylmu1rx" path="res://assets/models/skills/textures/闪电3.png" id="1_rjykk"]
+[ext_resource type="Shader" uid="uid://b6lvnorwa62m5" path="res://resources/shaders/skills/lighting_shader.tres" id="2_c4tj3"]
+[ext_resource type="Texture2D" uid="uid://clqm4cc1x36uv" path="res://assets/models/skills/textures/闪电2.png" id="3_gj567"]
 
-[sub_resource type="Gradient" id="Gradient_sgup7"]
-offsets = PackedFloat32Array(0, 0.9968355)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_jop34"]
-gradient = SubResource("Gradient_sgup7")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5rasx"]
-gravity = Vector3(0, 0, 0)
-color_ramp = SubResource("GradientTexture1D_jop34")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qbeuf"]
-render_priority = 0
-shader = ExtResource("2_fodp2")
-shader_parameter/Mark_Color = Color(0.16565639, 0.16565642, 0.16565639, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5rasx"]
+resource_name = "材质.002"
+albedo_color = Color(0.8, 0.8, 0.8, 1)
+albedo_texture = ExtResource("1_rjykk")
+metallic = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lm2c6"]
 render_priority = 0
-shader = ExtResource("3_qbeuf")
+shader = ExtResource("2_c4tj3")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lryuq"]
-render_priority = 0
-shader = ExtResource("4_fodp2")
-shader_parameter/Wave_Color = Color(0.36454004, 0.36453977, 1.92523e-07, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qbeuf"]
+resource_name = "材质.001"
+albedo_color = Color(0.8, 0.8, 0.8, 1)
+albedo_texture = ExtResource("3_gj567")
+metallic = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_lryuq"]
 _surfaces = [{
@@ -63,14 +54,14 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_83owt"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_sgup7"]
 _surfaces = [{
 "aabb": AABB(-1.703773, 0, -1.703773, 3.407546, 1e-05, 3.407546),
 "attribute_data": PackedByteArray("/////wAA/////wAAAAAAAA=="),
 "format": 34896613399,
 "index_count": 6,
 "index_data": PackedByteArray("AAABAAIAAgABAAMA"),
-"material": SubResource("ShaderMaterial_qbeuf"),
+"material": SubResource("StandardMaterial3D_5rasx"),
 "name": "材质",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -94,7 +85,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 192,
 "index_data": PackedByteArray("AAABAAIAAgABAAMABAAAAAIABQAAAAQABgAFAAQABwAFAAYACAAHAAYACQAHAAgACgAJAAgACwAJAAoADAALAAoADQALAAwADgANAAwADwANAA4AEAAPAA4AEQAPABAAEgARABAAEwARABIAFAATABIAFQATABQAFgAVABQAFwAVABYAGAAXABYAGQAXABgAGgAZABgAGwAZABoAHAAbABoAHQAbABwAHgAdABwAHwAdAB4AIAAfAB4AIQAfACAAIgAhACAAIwAhACIAJAAjACIAJQAjACQAJgAlACQAJwAlACYAKAAnACYAKQAnACgAKgApACgAKwApACoALAArACoALQArACwALgAtACwALwAtAC4AMAAvAC4AMQAvADAAMgAxADAAMwAxADIANAAzADIANQAzADQANgA1ADQANwA1ADYAOAA3ADYAOQA3ADgAOgA5ADgAOwA5ADoAPAA7ADoAPQA7ADwAPgA9ADwAPwA9AD4AQAA/AD4AQQA/AEAA"),
-"material": SubResource("ShaderMaterial_lryuq"),
+"material": SubResource("StandardMaterial3D_qbeuf"),
 "name": "材质",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -104,13 +95,5 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_lryuq")
 
-[node name="SkillLighting" type="Node3D"]
-script = ExtResource("1_c4vo0")
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-emitting = false
-amount = 3
-lifetime = 0.25
-one_shot = true
-process_material = SubResource("ParticleProcessMaterial_5rasx")
-draw_pass_1 = SubResource("ArrayMesh_83owt")
+[node name="MeshInstance3D" type="MeshInstance3D"]
+mesh = SubResource("ArrayMesh_sgup7")
